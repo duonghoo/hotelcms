@@ -5,14 +5,15 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-warning">
-              <i class="nc-icon nc-chart text-warning"></i>
+              <!-- <i class="nc-icon nc-chart text-warning"></i> -->
+              <i class="fa fa-bed text-info"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Capacity</p>
-              <h4 class="card-title">105GB</h4>
+              <h5 class="">Khách đặt hôm nay</h5>
+              <h3 class="card-title">12 phòng</h3>
             </div>
             <div slot="footer">
-              <i class="fa fa-refresh"></i>Updated now
+              <span class="bg-success text-white rounded p-1">+12%</span>
             </div>
           </stats-card>
         </div>
@@ -20,14 +21,14 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-success">
-              <i class="nc-icon nc-light-3 text-success"></i>
+              <i class="fa fa-dollar text-success"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Revenue</p>
-              <h4 class="card-title">$1,345</h4>
+              <h5 class="">Doanh thu hôm nay</h5>
+              <h3 class="card-title">15.000.000 vnđ</h3>
             </div>
             <div slot="footer">
-              <i class="fa fa-calendar-o"></i>Last day
+              <span class="bg-success text-white rounded p-1">+15%</span>
             </div>
           </stats-card>
         </div>
@@ -35,14 +36,14 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-danger">
-              <i class="nc-icon nc-vector text-danger"></i>
+              <i class="fa fa-home text-danger"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Errors</p>
-              <h4 class="card-title">23</h4>
+              <h5 class="">Tổng số lượng đặt phòng</h5>
+              <h3 class="card-title">1210</h3>
             </div>
             <div slot="footer">
-              <i class="fa fa-clock-o"></i>Last day
+             
             </div>
           </stats-card>
         </div>
@@ -50,33 +51,31 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-info">
-              <i class="nc-icon nc-favourite-28 text-primary"></i>
+              <i class="fa fa-money text-primary"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Followers</p>
-              <h4 class="card-title">+45</h4>
+              <h5 class="">Tổng doanh thu</h5>
+              <h3 class="card-title">150.000.000</h3>
             </div>
             <div slot="footer">
-              <i class="fa fa-refresh"></i>Updated now
+              
             </div>
           </stats-card>
         </div>
 
       </div>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <chart-card :chart-data="lineChart.data"
                       :chart-options="lineChart.options"
                       :responsive-options="lineChart.responsiveOptions">
             <template slot="header">
-              <h4 class="card-title">Users Behavior</h4>
-              <p class="card-category">24 Hours performance</p>
+              <h4 class="card-title">Bảng biến động đặt phòng trong năm</h4>
+              <p class="card-category">theo từng tháng</p>
             </template>
             <template slot="footer">
               <div class="legend">
-                <i class="fa fa-circle text-info"></i> Open
-                <i class="fa fa-circle text-danger"></i> Click
-                <i class="fa fa-circle text-warning"></i> Click Second Time
+                <i class="fa fa-circle text-info"></i> Số phòng
               </div>
               <hr>
               <div class="stats">
@@ -86,7 +85,7 @@
           </chart-card>
         </div>
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <chart-card :chart-data="pieChart.data" chart-type="Pie">
             <template slot="header">
               <h4 class="card-title">Email Statistics</h4>
@@ -104,7 +103,7 @@
               </div>
             </template>
           </chart-card>
-        </div>
+        </div> -->
       </div>
 
       <div class="row">
@@ -192,31 +191,48 @@
         },
         lineChart: {
           data: {
-            labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
+            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
             series: [
-              [287, 385, 490, 492, 554, 586, 698, 695],
-              [67, 152, 143, 240, 287, 335, 435, 437],
-              [23, 113, 67, 108, 190, 239, 307, 308]
+              [287, 385, 490, 492, 554, 586, 698, 695, 700, 800, 900, 1000],
+    
             ]
           },
           options: {
             low: 0,
-            high: 800,
+            high: 1200,
             showArea: false,
-            height: '245px',
+            height: '250px',
             axisX: {
-              showGrid: false
+              showGrid: false, // Hiển thị lưới dọc
+              offset: 20,     // Khoảng cách nhãn tới trục
+              labelOffset: {
+                x: -30,       // Dịch nhãn trên trục X sang trái hoặc phải
+                y: 0          // Dịch nhãn lên trên hoặc xuống dưới
+              },
+              position: 'end', // Vị trí trục (start, center, end)
+              alignLabels: true // Căn chỉnh nhãn giữa các điểm dữ liệu
+            },
+            axisY: {
+              offset: 80,
+              labelOffset: {
+                x: -30,       // Dịch nhãn trên trục X sang trái hoặc phải
+                y: 10          // Dịch nhãn lên trên hoặc xuống dưới
+              },
+                // Khoảng cách nhãn tới trục
+            
+               // Vị trí trục (start, center, end)
+              alignLabels: true // Căn chỉnh nhãn giữa các điểm dữ liệu
             },
             lineSmooth: true,
             showLine: true,
             showPoint: true,
-            fullWidth: true,
+            fullWidth: false,
             chartPadding: {
               right: 50
             }
           },
           responsiveOptions: [
-            ['screen and (max-width: 640px)', {
+            ['screen and (max-width: 80%)', {
               axisX: {
                 labelInterpolationFnc (value) {
                   return value[0]

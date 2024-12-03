@@ -4,7 +4,7 @@
       <slot name="header"></slot>
     </div>
     <div class="card-body">
-      <div :id="chartId" class="ct-chart"></div>
+      <div :id="chartId" class="ct-chart pl-5"></div>
     </div>
     <div class="card-footer" v-if="$slots.footer">
       <slot name="footer"></slot>
@@ -53,15 +53,46 @@
        * Initializes the chart by merging the chart options sent via props and the default chart options
        */
       initChart () {
-        var chartIdQuery = `#${this.chartId}`
-        this.chart = this.$Chartist[this.chartType](chartIdQuery, this.chartData, this.chartOptions, this.responsiveOptions)
-        this.$emit('initialized', this.chart)
-        if (this.chartType === 'Line') {
-          this.animateLineChart()
-        }
-        if (this.chartType === 'Bar') {
-          this.animateBarChart()
-        }
+        var chartIdQuery = `#${this.chartId}`;
+this.chart = this.$Chartist[this.chartType](chartIdQuery, this.chartData, this.chartOptions, this.responsiveOptions);
+
+this.$emit('initialized', this.chart);
+
+// Kiểm tra loại biểu đồ và áp dụng hiệu ứng
+if (this.chartType === 'Line') {
+  this.animateLineChart();
+}
+if (this.chartType === 'Bar') {
+  this.animateBarChart();
+}
+
+// Thêm sự kiện 'draw' để hiển thị nhãn
+this.chart.on('draw', (data) => {
+  if (data.type === 'point' && this.chartType === 'Line') {
+    // Hiển thị giá trị trên các điểm của biểu đồ Line
+    data.group
+      .elem('text', {
+        x: data.x,
+        y: data.y - 10, // Điều chỉnh vị trí nhãn
+        'text-anchor': 'middle',
+        style: 'fill: #000; font-size: 12px;'
+      })
+      .text(data.value.y); // Giá trị của điểm
+  }
+
+  if (data.type === 'bar' && this.chartType === 'Bar') {
+    // Hiển thị giá trị trên các cột của biểu đồ Bar
+    data.group
+      .elem('text', {
+        x: data.x2,
+        y: data.y2 - 10, // Điều chỉnh vị trí nhãn phía trên cột
+        'text-anchor': 'middle',
+        style: 'fill: #000; font-size: 12px;'
+      })
+      .text(data.value.y); // Giá trị của cột
+  }
+});
+
       },
       /***
        * Assigns a random id to the chart

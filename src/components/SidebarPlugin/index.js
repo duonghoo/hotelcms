@@ -6,7 +6,7 @@ const SidebarStore = {
   sidebarLinks: [
     {
       name: 'Dashboard',
-      icon: 'ti-panel',
+      icon: 'fa fa-hotel',
       path: '/admin/overview'
     }
   ],

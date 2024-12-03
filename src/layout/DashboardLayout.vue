@@ -3,12 +3,16 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/admin/overview">
-        <i class="nc-icon nc-chart-pie-35"></i>
-        <p>Dashboard</p>
+        <i class="fa fa-home"></i>
+        <p>Tổng Quan</p>
       </sidebar-link>
-      <sidebar-link to="/admin/user">
-        <i class="nc-icon nc-circle-09"></i>
-        <p>User Profile</p>
+      <sidebar-link to="/admin/hotel">
+        <i class="fa fa-building"></i>
+        <p>Khánh sạn</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/transaction">
+        <i class="fa fa-credit-card-alt"></i>
+        <p>Hóa đơn</p>
       </sidebar-link>
       <sidebar-link to="/admin/table-list">
         <i class="nc-icon nc-notes"></i>
